@@ -10,11 +10,23 @@ const {
   deleteProduct,
 } = require("../controllers/ProductControllers");
 
+const {
+  validateProduct,
+} = require("../validations/productValidation");
+
 const router = express.Router();
 
-router.post("/", authMiddleware, createProduct);
+// Create Product
+router.post(
+  "/",
+  authMiddleware,
+  validateProduct,
+  createProduct
+);
+
 
 router.get("/", authMiddleware, getAllProducts);
+
 
 router.get("/:id", authMiddleware, getProductById);
 
